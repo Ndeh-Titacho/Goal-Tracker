@@ -2,6 +2,7 @@ import React, {createContext, useContext,useEffect, useState, type ReactNode}  f
 import supabase from '@/Supabase/SupabaseClient'
 import type { User, Session} from '@supabase/supabase-js'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 
 interface AuthContextType {
@@ -65,6 +66,7 @@ const signInWithEmail = async (email: string, password: string) => {
       return data
     }
     navigate('/dashboard')
+    toast.success('Successfully signed in!')
     return data
   } catch (err: any) {
     console.error('Auth network error', err)
@@ -79,11 +81,15 @@ const signInWithEmail = async (email: string, password: string) => {
 //SignUp Function
 const signUpWithEmail = async (email: string, password: string) => {
   try {
+    setLoading(true)
     const { data, error} = await supabase.auth.signUp({ email, password})
     if (error) {
       setError(error.message)
     }
+    console.log('Sign Up:', { email, password, data, error }) 
     return data
+    navigate('/dashboard')
+    toast.success('Account created successfully!')
   } catch (err: any) {
     console.error('Auth network error', err)
     setError(err?.message ?? 'Network error: failed to reach auth server')

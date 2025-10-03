@@ -87,7 +87,7 @@ const AuthTabs: React.FC = (): JSX.Element => {
   ]
 
   return (
-    <div className="w-full max-w-md p-6 bg-white ">
+    <div className="w-full max-w-md p-6 overflow-y-hidden ">
      
       <Card>
         <CardHeader className="text-center ">
