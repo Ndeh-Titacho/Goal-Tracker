@@ -1,7 +1,7 @@
 
 import { LayoutDashboard, User } from "lucide-react"
 import { Link } from "react-router-dom"
-import { SidebarContent,Sidebar, SidebarGroup,SidebarGroupLabel,SidebarGroupContent,SidebarMenu,SidebarMenuItem,SidebarMenuButton } from "../ui/sidebar"
+import { SidebarContent,Sidebar, SidebarGroup,SidebarGroupLabel,SidebarGroupContent,SidebarMenu,SidebarMenuItem,SidebarMenuButton, SidebarHeader } from "../ui/sidebar"
 
 
 const SideBar = () => {
@@ -14,7 +14,7 @@ const SideBar = () => {
     <div>
  <Sidebar collapsible="icon" >
       <SidebarContent>
-        <SidebarGroup>
+        <SidebarHeader className="pt-15">
           <SidebarGroupLabel className="flex gap-4">
             <div >
               <div className="rounded-md h-4 w-4 bg-gradient-to-br from-purple-600 to-green-500 p-4 flex items-center justify-center text-white font-bold">GT</div>
@@ -23,8 +23,11 @@ const SideBar = () => {
                 <div className="text-sm text-muted-foreground">Goal Tracker</div>
               </div>
               </SidebarGroupLabel>
+        </SidebarHeader>
+        <SidebarGroup>
+          
           <SidebarGroupContent>
-            <SidebarMenu className="py-4">
+            <SidebarMenu className="">
               {items.map((item) => {
                 const Icon = item.icon
                 return (

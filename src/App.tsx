@@ -1,10 +1,10 @@
 import {Routes, Route } from "react-router-dom"
 import Auth from "./Components/Auth/Auth"
-import PrivateRoutes from "./Pages/PrivateRoutes"
 import Dashboard from "./Pages/Dashboard"
 import { Toaster } from "sonner"
 import DashboardLayout from "./Components/Layout/DashboardLayout"
 import Members from "./Pages/Members"
+import CreateGoal from "./Pages/CreateGoal"
 
 function App() {
  
@@ -20,6 +20,7 @@ function App() {
           <Route element={<DashboardLayout/>}>
             <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/members" element={<Members />} />
+            <Route path="/goals/create" element={<CreateGoal />} />  
           </Route>
         </Routes>
 
