@@ -5,6 +5,8 @@ import { Toaster } from "sonner"
 import DashboardLayout from "./Components/Layout/DashboardLayout"
 import Members from "./Pages/Members"
 import CreateGoal from "./Pages/CreateGoal"
+import Goals from "./Pages/Goals"
+import GoalDetails from "./Pages/GoalDetails"
 
 function App() {
  
@@ -21,6 +23,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/members" element={<Members />} />
             <Route path="/goals/create" element={<CreateGoal />} />  
+            <Route path="/goals" element={<Goals />} />
+            <Route path="/goals/:id" element={<GoalDetails />} />
           </Route>
         </Routes>
 
