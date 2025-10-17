@@ -1,6 +1,5 @@
-import { createContext, useContext,useState,  } from "react"
+import { createContext, useContext,useState, useEffect  } from "react"
 import supabase from "@/Supabase/SupabaseClient";
-import { useAuth } from "./useAuth";
 import type { formDataType } from "../Pages/CreateGoal";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -13,6 +12,7 @@ export interface Goal {
   status: 'ongoing' | 'completed' | 'abandoned';
   thumbnail?: string;
   created_at: string;
+  why?: string;
   progress?: number;
   task_count?: number;
   Tasks?: [
@@ -31,9 +31,20 @@ interface GoalsContextType {
   goals: Goal[] | null;
   loading: boolean;
   error: string | null;
+  recentGoals: Goal[];
+  stats: DashboardStats;
   fetchGoals: (userId:string) => Promise<any>;
   createGoal: (formData: formDataType) => Promise<void>;
+  
 }
+
+interface DashboardStats {
+  totalGoals: number;
+  completedGoals: number;
+  ongoingGoals: number;
+  totalTasks: number;
+  completedTasks: number;
+};
 
 const GoalsContext = createContext<GoalsContextType | undefined>(undefined)
 
@@ -42,6 +53,14 @@ export const GoalsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [goals, setGoals] = useState<Goal[] | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+  const [recentGoals, setRecentGoals] = useState<Goal[]>([]);
+  const [stats, setStats] = useState<DashboardStats>({
+    totalGoals: 0,
+    completedGoals: 0,
+    ongoingGoals: 0,
+    totalTasks: 0,
+    completedTasks: 0
+  });
   const navigate = useNavigate()
 
   
@@ -72,6 +91,50 @@ export const GoalsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
     
   }
+
+   // Calculate stats whenever goals change
+useEffect(() => {
+  if (!goals) return;
+
+  const totalGoals = goals.length || 0
+  const completedGoals = goals.filter(goal => goal.status === "completed").length || 0
+  const ongoingGoals = goals.filter(goal => goal.status === "ongoing").length || 0
+
+  let totalTasks = 0
+  let completedTasks = 0
+
+  const recentGoalswithProgress: Goal[] = goals.map(goal => {
+    const tasks = goal.Tasks || [] 
+    const taskCount = tasks.length 
+    const completedTaskCount = tasks.filter(task => task.status === "done").length
+
+    totalTasks += taskCount
+    completedTasks += completedTaskCount
+
+    const progress = taskCount > 0 ? Math.round((completedTaskCount / taskCount) * 100) : 0
+
+    return {
+      id: goal.id,
+      name: goal.name,
+      description: goal.description || '',
+      priority: goal.priority,
+      status: goal.status,
+      thumbnail: goal.thumbnail ?? "",
+      created_at: goal.created_at,
+      progress,
+      task_count: taskCount
+    }
+  })
+
+  setRecentGoals(recentGoalswithProgress)
+  setStats({
+    totalGoals,
+    completedGoals,
+    ongoingGoals,
+    totalTasks,
+    completedTasks
+  })
+}, [goals])
 
   const createGoal = async(formData:formDataType) => {
     setLoading(true)
@@ -107,7 +170,7 @@ export const GoalsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }
 
   return (
-    <GoalsContext.Provider value={{ goals, fetchGoals,loading, error,createGoal }}>
+    <GoalsContext.Provider value={{ goals, recentGoals, stats, fetchGoals,loading, error,createGoal }}>
       {children}
     </GoalsContext.Provider>
   )

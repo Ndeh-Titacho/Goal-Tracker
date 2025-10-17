@@ -6,36 +6,23 @@ import { useEffect, useState } from "react";
 import DashboardStats from "@/Components/Dashboard/DashboardStats";
 import { useNavigate } from "react-router-dom";
 import { useGoal } from "@/Hooks/useGoal";
-import type { Goal } from "@/Hooks/useGoal";
 import GoalsCard from "@/Components/Dashboard/GoalsCard";
 import { Card } from "@/Components/ui/card";
 import { Target } from "lucide-react";
 
-interface DashboardStats {
-  totalGoals: number;
-  completedGoals: number;
-  ongoingGoals: number;
-  totalTasks: number;
-  completedTasks: number;
-};
+
 
 const Dashboard = () => {
 
   const navigate = useNavigate()
   const {user,session} = useAuth()
-  const {goals,fetchGoals} = useGoal()
+  const {goals,fetchGoals,stats,recentGoals} = useGoal()
   const [loading, setLoading] = useState(true)
-  const [stats, setStats] = useState<DashboardStats>({
-    totalGoals: 0,
-    completedGoals: 0,
-    ongoingGoals: 0,
-    totalTasks: 0,
-    completedTasks: 0
-  });
-  const [recentGoals, setRecentGoals] = useState<Goal[]>([]);
+ 
+  
 
   useEffect(() => {
-    if (!loading &&!session?.user) {
+    if (!loading && !session?.user) {
       navigate('/auth')
     }
   }, [session, navigate, loading])
@@ -50,49 +37,7 @@ const Dashboard = () => {
     }
   }, [user?.id])
 
-  // Calculate stats whenever goals change
-useEffect(() => {
-  if (!goals) return;
-
-  const totalGoals = goals.length || 0
-  const completedGoals = goals.filter(goal => goal.status === "completed").length || 0
-  const ongoingGoals = goals.filter(goal => goal.status === "ongoing").length || 0
-
-  let totalTasks = 0
-  let completedTasks = 0
-
-  const recentGoalswithProgress: Goal[] = goals.map(goal => {
-    const tasks = goal.Tasks || [] 
-    const taskCount = tasks.length 
-    const completedTaskCount = tasks.filter(task => task.status === "done").length
-
-    totalTasks += taskCount
-    completedTasks += completedTaskCount
-
-    const progress = taskCount > 0 ? Math.round((completedTaskCount / taskCount) * 100) : 0
-
-    return {
-      id: goal.id,
-      name: goal.name,
-      description: goal.description || '',
-      priority: goal.priority,
-      status: goal.status,
-      thumbnail: goal.thumbnail ?? "",
-      created_at: goal.created_at,
-      progress,
-      task_count: taskCount
-    }
-  })
-
-  setRecentGoals(recentGoalswithProgress)
-  setStats({
-    totalGoals,
-    completedGoals,
-    ongoingGoals,
-    totalTasks,
-    completedTasks
-  })
-}, [goals])
+ 
   
 
   if(loading) {
@@ -133,14 +78,14 @@ useEffect(() => {
 
       <div className="flex justify-between my-4">
       <h1 className="text-2xl font-semibold">Recent Goals</h1>
-      <Button variant="outline"> View All</Button>
+      <Button variant="outline" onClick={() => navigate('/goals')}> View All</Button>
       </div>
 
       {recentGoals.length > 0 ? (
-      <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {
         recentGoals.map(goal => (
-          <GoalsCard key={goal.id} goals={goal} />
+          <GoalsCard key={goal.id} goals={goal}/>
         ))
       }
       </div>

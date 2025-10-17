@@ -5,7 +5,6 @@ import { useAuth } from "@/Hooks/useAuth"
 import {CircleUserRound,LogOut  } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { useNavigate } from "react-router-dom"
-import React from "react"
 
 const Header = () => {
   const {user, signOut} = useAuth()

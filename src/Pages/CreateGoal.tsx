@@ -8,7 +8,6 @@ import { useState } from 'react'
 import { useGoal } from '@/Hooks/useGoal'
 import { toast } from 'sonner'
 import { ClipLoader } from 'react-spinners'
-import supabase from '@/Supabase/SupabaseClient'
 import { useAuth } from '@/Hooks/useAuth'
 
 export interface formDataType {
