@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './Hooks/useAuth.tsx'
 import { GoalsProvider } from './Hooks/useGoal.tsx'
+import { TaskProvider } from './Hooks/useTask.tsx'
 import { BrowserRouter } from 'react-router-dom'
 
 
@@ -12,7 +13,9 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
     <AuthProvider>
       <GoalsProvider>
+        <TaskProvider>
         <App />
+        </TaskProvider>
       </GoalsProvider>
     </AuthProvider>
    </BrowserRouter>
