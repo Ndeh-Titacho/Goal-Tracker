@@ -161,7 +161,9 @@ const GoalDetails = () => {
                 </Dialog>
                 
             </div>
-            <div>
+            
+            {/* Kanban Board */}
+            <div className="mt-4">
                 <KanbanBoard goalId={id}/>
             </div>
         </div>

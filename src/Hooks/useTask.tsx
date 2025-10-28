@@ -31,6 +31,11 @@ const [loading, setLoading] = useState<boolean>(false)
 const [error, setError] = useState<string | null>(null)
 const navigate = useNavigate()
 
+const totaltask = tasks?.length || 0
+const completedtask = tasks?.filter(task => task.status === "done").length || 0
+const ongoingtask = tasks?.filter(task => task.status === "todo").length || 0
+console.log(totaltask,completedtask,ongoingtask)
+
 
 const createTask = async(formData: Task) => {
     setLoading(true)

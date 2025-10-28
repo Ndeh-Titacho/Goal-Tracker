@@ -15,16 +15,14 @@ export interface Goal {
   why?: string;
   progress?: number;
   task_count?: number;
-  Tasks?: [
-    {
-      id: string;
-      name: string;
-      description: string;
-      status: 'todo' | 'in_progress' | 'done';
-      created_at: string;
-      updated_at: string;
-    }
-  ];
+  tasks?: {
+    id: string;
+    title: string;
+    description?: string;
+    status: 'todo' | 'in_progress' | 'done';
+    created_at: string;
+    updated_at: string;
+  }[];
 }
 
 interface GoalsContextType {
@@ -33,6 +31,7 @@ interface GoalsContextType {
   error: string | null;
   recentGoals: Goal[];
   stats: DashboardStats;
+  totalTasks: number;
   fetchGoals: (userId:string) => Promise<any>;
   createGoal: (formData: formDataType) => Promise<void>;
   
@@ -51,9 +50,10 @@ const GoalsContext = createContext<GoalsContextType | undefined>(undefined)
 export const GoalsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const [goals, setGoals] = useState<Goal[] | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const [recentGoals, setRecentGoals] = useState<Goal[]>([]);
+  const [totalTasks, setTotalTasks] = useState<number>(0);
   const [stats, setStats] = useState<DashboardStats>({
     totalGoals: 0,
     completedGoals: 0,
@@ -75,7 +75,7 @@ export const GoalsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       thumbnail,
       status,
       created_at,
-      tasks(id, status)`)
+      tasks(id, title, status, description, created_at, updated_at)`)
     .eq("user_id", userId)
     .order("created_at", { ascending: false });
     if (goals) {
@@ -103,37 +103,43 @@ useEffect(() => {
   let totalTasks = 0
   let completedTasks = 0
 
-  const recentGoalswithProgress: Goal[] = goals.map(goal => {
-    const tasks = goal.Tasks || [] 
-    const taskCount = tasks.length 
-    const completedTaskCount = tasks.filter(task => task.status === "done").length
+ // First calculate all the totals
+goals.forEach(goal => {
+  const tasks = goal.tasks || [];
+  const taskCount = tasks.length;
+  const completedTaskCount = tasks.filter(task => task.status === 'done').length;
+  
+  totalTasks += taskCount;
+  completedTasks += completedTaskCount;
+});
 
-    totalTasks += taskCount
-    completedTasks += completedTaskCount
+// Update the stats state
+setTotalTasks(totalTasks);
+setStats({
+  totalGoals,
+  completedGoals,
+  ongoingGoals,
+  totalTasks,
+  completedTasks
+});
+console.log('Total tasks calculated:', totalTasks);
 
-    const progress = taskCount > 0 ? Math.round((completedTaskCount / taskCount) * 100) : 0
+// Create the recentGoalswithProgress array with progress for each goal
+const recentGoalswithProgress: Goal[] = goals.map(goal => {
+  const tasks = goal.tasks || [];
+  const taskCount = tasks.length;
+  const completedTaskCount = tasks.filter(task => task.status === 'done').length;
+  const progress = taskCount > 0 ? Math.round((completedTaskCount / taskCount) * 100) : 0;
 
-    return {
-      id: goal.id,
-      name: goal.name,
-      description: goal.description || '',
-      priority: goal.priority,
-      status: goal.status,
-      thumbnail: goal.thumbnail ?? "",
-      created_at: goal.created_at,
-      progress,
-      task_count: taskCount
-    }
-  })
-
+  return {
+    ...goal,
+    progress,
+    task_count: taskCount,
+    completed_task_count: completedTaskCount
+  };
+});
   setRecentGoals(recentGoalswithProgress)
-  setStats({
-    totalGoals,
-    completedGoals,
-    ongoingGoals,
-    totalTasks,
-    completedTasks
-  })
+ 
 }, [goals])
 
   const createGoal = async(formData:formDataType) => {
@@ -170,7 +176,16 @@ useEffect(() => {
   }
 
   return (
-    <GoalsContext.Provider value={{ goals, recentGoals, stats, fetchGoals,loading, error,createGoal }}>
+    <GoalsContext.Provider value={{
+      goals,
+      loading,
+      error,
+      recentGoals,
+      stats,
+      totalTasks,
+      fetchGoals,
+      createGoal,
+    }}>
       {children}
     </GoalsContext.Provider>
   )
