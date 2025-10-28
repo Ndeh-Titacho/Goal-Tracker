@@ -7,7 +7,7 @@ import { useGoal } from "@/Hooks/useGoal"
 
 const Goals = () => {
   const navigate = useNavigate()
-  const {goals} = useGoal()
+  const {recentGoals} = useGoal()
   
   return (
     <div className="p-8 pt-20">
@@ -22,8 +22,8 @@ const Goals = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        {goals && goals.length > 0 ? (
-          goals.map((goal) => (
+        {recentGoals && recentGoals.length > 0 ? (
+          recentGoals.map((goal) => (
             <GoalsCard key={goal.id} goals={goal} />
           ))
         ) : (

@@ -7,6 +7,7 @@ import Members from "./Pages/Members"
 import CreateGoal from "./Pages/CreateGoal"
 import Goals from "./Pages/Goals"
 import GoalDetails from "./Pages/GoalDetails"
+import NotFound from "./Pages/NotFound"
 
 function App() {
  
@@ -26,6 +27,9 @@ function App() {
             <Route path="/goals" element={<Goals />} />
             <Route path="/goals/:id" element={<GoalDetails />} />
           </Route>
+
+          {/* Not Found */}
+          <Route path="*" element={<NotFound />}  />
         </Routes>
 
         <Toaster position="top-right" richColors />
