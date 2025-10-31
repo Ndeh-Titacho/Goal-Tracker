@@ -1,7 +1,7 @@
 import { useDroppable } from "@dnd-kit/core";
-import type { Column } from "../Kanban/KanbanBoard";
+import type { Column } from "@/components/Kanban/KanbanBoard";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import KanbanTask from "./KanbanTask";
+import KanbanTask from "@/components/Kanban/KanbanTask";
 
 
 

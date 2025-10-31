@@ -3,7 +3,7 @@ import { Tabs,TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { Button } from "../ui/button"
 import { useState, type JSX } from "react"
-import { useAuth } from "@/Hooks/useAuth"
+import { useAuth } from "@/hooks/useAuth"
 import React from "react";
 import { ClipLoader } from "react-spinners"
 

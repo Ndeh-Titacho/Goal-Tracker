@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
 import { Progress } from "../ui/progress"
-import type { Goal } from "@/Hooks/useGoal";
+import type { Goal } from "@/hooks/useGoal";
 import { Button } from "../ui/button";
 import { Calendar,Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";

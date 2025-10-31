@@ -1,13 +1,13 @@
-import { Button } from "@/Components/ui/button"
-import { Skeleton } from "@/Components/ui/skeleton";
-import { useAuth } from "@/Hooks/useAuth";
+import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton";
+import { useAuth } from "@/hooks/useAuth";
 import { Plus } from "lucide-react"
 import { useEffect, useState } from "react";
-import DashboardStats from "@/Components/Dashboard/DashboardStats";
+import DashboardStats from "@/components/Dashboard/DashboardStats";
 import { useNavigate } from "react-router-dom";
-import { useGoal } from "@/Hooks/useGoal";
-import GoalsCard from "@/Components/Dashboard/GoalsCard";
-import { Card } from "@/Components/ui/card";
+import { useGoal } from "@/hooks/useGoal";
+import GoalsCard from "@/components/Dashboard/GoalsCard";
+import { Card } from "@/components/ui/card";
 import { Target } from "lucide-react";
 
 

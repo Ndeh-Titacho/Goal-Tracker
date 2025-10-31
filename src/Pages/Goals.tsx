@@ -1,9 +1,9 @@
 
-import GoalsCard from "@/Components/Dashboard/GoalsCard"
-import { Button } from "@/Components/ui/button"
+import GoalsCard from "@/components/Dashboard/GoalsCard"
+import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { useNavigate } from "react-router-dom"
-import { useGoal } from "@/Hooks/useGoal"
+import { useGoal } from "@/hooks/useGoal"
 
 const Goals = () => {
   const navigate = useNavigate()
