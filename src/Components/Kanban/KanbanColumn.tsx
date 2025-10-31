@@ -3,7 +3,7 @@ import type { Column } from "../Kanban/KanbanBoard";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import KanbanTask from "./KanbanTask";
 
-import { Card } from "../ui/card";
+
 
 interface KanbanColumnProps {
     column: Column;
