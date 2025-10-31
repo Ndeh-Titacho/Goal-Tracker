@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { DndContext, type DragEndEvent, useSensors, useSensor, PointerSensor, TouchSensor } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
-import KanbanColumn from "./KanbanColumn";
+import KanbanColumn from "@/components/Kanban/KanbanColumn";
 import supabase from "@/Supabase/SupabaseClient";
 import { Card } from "../ui/card";
 

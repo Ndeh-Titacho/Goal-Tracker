@@ -1,14 +1,14 @@
-import { Button } from '@/Components/ui/button'
+import { Button } from '@/components/ui/button'
 import {ArrowLeft,Hand,Save } from 'lucide-react'
-import { Card } from '@/Components/ui/card'
-import { Input } from '@/Components/ui/input'
-import { Select,SelectContent,SelectTrigger,SelectItem, SelectValue,SelectGroup,SelectLabel } from '@/Components/ui/select'
+import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Select,SelectContent,SelectTrigger,SelectItem, SelectValue,SelectGroup,SelectLabel } from '@/components/ui/select'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { useGoal } from '@/Hooks/useGoal'
+import { useGoal } from '@/hooks/useGoal'
 import { toast } from 'sonner'
 import { ClipLoader } from 'react-spinners'
-import { useAuth } from '@/Hooks/useAuth'
+import { useAuth } from '@/hooks/useAuth'
 
 export interface formDataType {
     id: string,

@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { ModeToggle } from "../ui/mode-toggle"
 import { SidebarTrigger } from "../ui/sidebar"
-import { useAuth } from "@/Hooks/useAuth"
+import { useAuth } from "@/hooks/useAuth"
 import {CircleUserRound,LogOut  } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { useNavigate } from "react-router-dom"
