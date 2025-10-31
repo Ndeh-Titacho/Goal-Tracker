@@ -1,7 +1,7 @@
-import { createContext, useContext,useState, useEffect  } from "react"
+import { createContext, useContext,useState  } from "react"
 import supabase from "@/Supabase/SupabaseClient";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+
 
 export interface Task {
     goal_id: string;
@@ -29,7 +29,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
 const [tasks, setTasks] = useState<Task[] | null>(null)
 const [loading, setLoading] = useState<boolean>(false)
 const [error, setError] = useState<string | null>(null)
-const navigate = useNavigate()
+
 
 const totaltask = tasks?.length || 0
 const completedtask = tasks?.filter(task => task.status === "done").length || 0
