@@ -8,7 +8,7 @@ import { Card } from "../ui/card";
 export type UniqueIdentifier = string | number;
 
 export interface Task {
-  id: UniqueIdentifier;
+  id: UniqueIdentifier;   
   title: string;
   content: string;
   status?: 'todo' | 'in_progress' | 'done';
