@@ -1,13 +1,13 @@
 import {Routes, Route } from "react-router-dom"
 import Auth from "./components/Auth/Auth"
-import Dashboard from "./Pages/Dashboard"
+import Dashboard from "./pages/Dashboard"
 import { Toaster } from "sonner"
 import DashboardLayout from "./components/Layout/DashboardLayout"
-import Members from "./Pages/Members"
-import CreateGoal from "./Pages/CreateGoal"
-import Goals from "./Pages/Goals"
-import GoalDetails from "./Pages/GoalDetails"
-import NotFound from "./Pages/NotFound"
+import Members from "./pages/Members"
+import CreateGoal from "./pages/CreateGoal"
+import Goals from "./pages/Goals"
+import GoalDetails from "./pages/GoalDetails"
+import NotFound from "./pages/NotFound"
 
 function App() {
  

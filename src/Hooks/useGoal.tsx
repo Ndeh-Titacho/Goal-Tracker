@@ -1,6 +1,6 @@
 import { createContext, useContext,useState, useEffect  } from "react"
 import supabase from "@/Supabase/SupabaseClient";
-import type { formDataType } from "../Pages/CreateGoal";
+import type { formDataType } from "../pages/CreateGoal";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
