@@ -4,7 +4,7 @@ import Header from "./Header"
 import { ThemeProvider } from "../ui/theme-provider"
 import { useEffect } from "react"
 import supabase from "@/Supabase/SupabaseClient"
-import Sidebar from "../Layout/sidebar"
+import Sidebar from "./sidebar"
 
 
 const DashboardLayout = () => {
