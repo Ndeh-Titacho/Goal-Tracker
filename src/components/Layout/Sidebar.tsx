@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { SidebarContent,Sidebar, SidebarGroup,SidebarGroupLabel,SidebarGroupContent,SidebarMenu,SidebarMenuItem,SidebarMenuButton, SidebarHeader } from "../ui/sidebar"
 
 
-const SideBar = () => {
+const sidebar = () => {
 
   const items = [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -50,5 +50,5 @@ const SideBar = () => {
   )
 }
 
-export default SideBar
+export default sidebar
 // ...existing code...

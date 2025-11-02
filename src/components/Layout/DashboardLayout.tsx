@@ -1,10 +1,10 @@
 import { Outlet,useNavigate } from "react-router-dom"
 import { SidebarProvider, } from "../ui/sidebar"
-import SideBar from "./SideBar"
 import Header from "./Header"
 import { ThemeProvider } from "../ui/theme-provider"
 import { useEffect } from "react"
 import supabase from "@/Supabase/SupabaseClient"
+import Sidebar from "../Layout/sidebar"
 
 
 const DashboardLayout = () => {
@@ -31,7 +31,7 @@ const DashboardLayout = () => {
       <ThemeProvider>
 
         <SidebarProvider>
-          <SideBar />
+          <Sidebar />
           <main className="border w-full min-h-screen">
             <Header/>
             <Outlet />
