@@ -10,21 +10,21 @@ import Sidebar from "./sidebar"
 const DashboardLayout = () => {
   const navigate = useNavigate()
 
-  // useEffect( () => {
-  //   const checkSession = async () => { 
-  //     const {data: session, error} = await supabase.auth.getSession();
-  //     if(session) {
-  //       return
-  //     }
-  //     if(!session){
-  //       navigate("/auth")
-  //     }
-  //     if(error){
-  //       console.log(error.message)
-  //     }
-  //   }
-  //   checkSession()
-  // }, [navigate])
+  useEffect( () => {
+    const checkSession = async () => { 
+      const {data: session, error} = await supabase.auth.getSession();
+      if(session) {
+        return
+      }
+      if(!session){
+        navigate("/auth")
+      }
+      if(error){
+        console.log(error.message)
+      }
+    }
+    checkSession()
+  }, [navigate])
   
   return (
     <div>
