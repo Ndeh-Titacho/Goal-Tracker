@@ -1,13 +1,13 @@
 import { Outlet,useNavigate } from "react-router-dom"
 import { SidebarProvider, } from "../ui/sidebar"
-import Header from "./Header"
 import { ThemeProvider } from "../ui/theme-provider"
 import { useEffect } from "react"
 import supabase from "@/Supabase/SupabaseClient"
 import Sidebar from "./sidebar"
+import Header from "./header"
 
 
-const DashboardLayout = () => {
+const dashboardLayout = () => {
   const navigate = useNavigate()
 
   useEffect( () => {
@@ -17,7 +17,7 @@ const DashboardLayout = () => {
         return
       }
       if(!session){
-        navigate("/auth")
+        navigate("/")
       }
       if(error){
         console.log(error.message)
@@ -42,4 +42,4 @@ const DashboardLayout = () => {
   )
 }
 
-export default DashboardLayout
+export default dashboardLayout

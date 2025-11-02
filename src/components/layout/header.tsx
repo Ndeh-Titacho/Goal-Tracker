@@ -6,7 +6,7 @@ import {CircleUserRound,LogOut  } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { useNavigate } from "react-router-dom"
 
-const Header = () => {
+const header = () => {
   const {user, signOut} = useAuth()
   const navigate = useNavigate()
 
@@ -77,4 +77,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default header
